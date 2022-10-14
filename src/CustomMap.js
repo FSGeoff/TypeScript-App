@@ -12,12 +12,19 @@ var CustomMap = /** @class */ (function () {
         });
     }
     CustomMap.prototype.addMarker = function (canBeMapped) {
-        new google.maps.Marker({
+        var _this = this;
+        var marker = new google.maps.Marker({
             map: this.googleMap,
             position: {
                 lat: canBeMapped.location.lat,
                 lng: canBeMapped.location.lng
             }
+        });
+        marker.addListener('click', function () {
+            var infoWindow = new google.maps.InfoWindow({
+                content: 'I\'m a map!'
+            });
+            infoWindow.open(_this.googleMap, marker);
         });
     };
     return CustomMap;

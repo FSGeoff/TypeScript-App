@@ -22,12 +22,19 @@ export class CustomMap {
     }
 
     addMarker(canBeMapped: Mappable): void {
-        new google.maps.Marker({
+        const marker = new google.maps.Marker({
             map: this.googleMap,
             position: {
                 lat: canBeMapped.location.lat,
                 lng: canBeMapped.location.lng
             }
+        });
+
+        marker.addListener('click', ()=> {
+            const infoWindow = new google.maps.InfoWindow({
+                content: 'I\'m a map!'
+            });
+            infoWindow.open(this.googleMap, marker);
         });
     }
 
