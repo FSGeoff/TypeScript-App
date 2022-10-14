@@ -11,6 +11,15 @@ var CustomMap = /** @class */ (function () {
             }
         });
     }
+    CustomMap.prototype.addUserMarker = function (user) {
+        new google.maps.Marker({
+            map: this.googleMap,
+            position: {
+                lat: user.location.lat,
+                lng: user.location.lng
+            }
+        });
+    };
     return CustomMap;
 }());
 exports.CustomMap = CustomMap;
