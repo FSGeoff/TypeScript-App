@@ -18,11 +18,11 @@ var CustomMap = /** @class */ (function () {
             position: {
                 lat: canBeMapped.location.lat,
                 lng: canBeMapped.location.lng
-            }
+            },
         });
         marker.addListener('click', function () {
             var infoWindow = new google.maps.InfoWindow({
-                content: 'I\'m a map!'
+                content: canBeMapped.markerContent()
             });
             infoWindow.open(_this.googleMap, marker);
         });

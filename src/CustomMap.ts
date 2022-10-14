@@ -1,3 +1,4 @@
+/// <reference types="@types/google.maps" />
 import { User } from "./User";
 import { Company } from "./Company";
 
@@ -6,6 +7,7 @@ interface Mappable {
         lat: number;
         lng: number;
     };
+    markerContent(): string;
 }
 
 export class CustomMap {
@@ -27,12 +29,12 @@ export class CustomMap {
             position: {
                 lat: canBeMapped.location.lat,
                 lng: canBeMapped.location.lng
-            }
+            },
         });
 
         marker.addListener('click', ()=> {
             const infoWindow = new google.maps.InfoWindow({
-                content: 'I\'m a map!'
+                content: canBeMapped.markerContent();
             });
             infoWindow.open(this.googleMap, marker);
         });

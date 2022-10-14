@@ -136884,13 +136884,16 @@ exports.User = void 0;
 // @ts-ignore
 var faker_1 = __importDefault(require("faker"));
 var User = /** @class */function () {
-  function User(props) {
+  function User() {
     this.name = faker_1.default.name.firstName();
     this.location = {
       lat: parseFloat(faker_1.default.address.latitude()),
       lng: parseFloat(faker_1.default.address.longitude())
     };
   }
+  User.prototype.markerContent = function () {
+    return "User Name: ".concat(this.name, ";");
+  };
   return User;
 }();
 exports.User = User;
@@ -136917,6 +136920,9 @@ var Company = /** @class */function () {
       lng: parseFloat(faker_1.default.address.longitude())
     };
   }
+  Company.prototype.markerContent = function () {
+    return "\n     <div>\n        <h1>Company Name: ".concat(this.companyName, "</h1>\n        <h3>Comapny Phrase: ").concat(this.catchPhrase, "</h3>\n    </div>\n        ");
+  };
   return Company;
 }();
 exports.Company = Company;
@@ -136948,7 +136954,7 @@ var CustomMap = /** @class */function () {
     });
     marker.addListener('click', function () {
       var infoWindow = new google.maps.InfoWindow({
-        content: 'I\'m a map!'
+        content: canBeMapped.markerContent()
       });
       infoWindow.open(_this.googleMap, marker);
     });
@@ -136997,7 +137003,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51500" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55147" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
