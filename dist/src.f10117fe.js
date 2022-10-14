@@ -136894,6 +136894,32 @@ var User = /** @class */function () {
   return User;
 }();
 exports.User = User;
+},{"faker":"../../node_modules/faker/index.js"}],"src/Company.ts":[function(require,module,exports) {
+"use strict";
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Company = void 0;
+// @ts-ignore
+var faker_1 = __importDefault(require("faker"));
+var Company = /** @class */function () {
+  function Company() {
+    this.companyName = faker_1.default.company.companyName();
+    this.catchPhrase = faker_1.default.company.catchPhrase();
+    this.location = {
+      lat: parseFloat(faker_1.default.address.latitude()),
+      lng: parseFloat(faker_1.default.address.longitude())
+    };
+  }
+  return Company;
+}();
+exports.Company = Company;
 },{"faker":"../../node_modules/faker/index.js"}],"src/CustomMap.ts":[function(require,module,exports) {
 "use strict";
 
@@ -136911,12 +136937,12 @@ var CustomMap = /** @class */function () {
       }
     });
   }
-  CustomMap.prototype.addUserMarker = function (user) {
+  CustomMap.prototype.addMarker = function (canBeMapped) {
     new google.maps.Marker({
       map: this.googleMap,
       position: {
-        lat: user.location.lat,
-        lng: user.location.lng
+        lat: canBeMapped.location.lat,
+        lng: canBeMapped.location.lng
       }
     });
   };
@@ -136931,12 +136957,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 /// <reference types="@types/google.maps" />
 var User_1 = require("./User");
+var Company_1 = require("./Company");
 var CustomMap_1 = require("./CustomMap");
 // @ts-ignore
 var user = new User_1.User();
+var company = new Company_1.Company();
 var customMap = new CustomMap_1.CustomMap('map');
-customMap.addUserMarker(user);
-},{"./User":"src/User.ts","./CustomMap":"src/CustomMap.ts"}],"../../n/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+customMap.addMarker(user);
+customMap.addMarker(company);
+},{"./User":"src/User.ts","./Company":"src/Company.ts","./CustomMap":"src/CustomMap.ts"}],"../../n/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -136961,7 +136990,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58764" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59562" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

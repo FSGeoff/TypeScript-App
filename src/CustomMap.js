@@ -11,12 +11,12 @@ var CustomMap = /** @class */ (function () {
             }
         });
     }
-    CustomMap.prototype.addUserMarker = function (user) {
+    CustomMap.prototype.addMarker = function (canBeMapped) {
         new google.maps.Marker({
             map: this.googleMap,
             position: {
-                lat: user.location.lat,
-                lng: user.location.lng
+                lat: canBeMapped.location.lat,
+                lng: canBeMapped.location.lng
             }
         });
     };
